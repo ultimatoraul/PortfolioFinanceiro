@@ -1,13 +1,13 @@
 ﻿namespace PortfolioFinanceiro.Business.Models
 {
-    internal class MarketData
+    public class MarketData
     {
         public decimal SelicRate { get; set; }
         public Dictionary<string, IndexPerformance> IndexPerformance { get; set; } = [];
         public List<SectorData> Sectors { get; set; } = [];
     }
 
-    internal class IndexPerformance
+    public class IndexPerformance
     {
         public decimal CurrentValue { get; set; }
         public decimal DailyChange { get; set; }
@@ -15,7 +15,7 @@
         public decimal YearToDate { get; set; }
     }
 
-    internal class SectorData
+    public class SectorData
     {
         public required string Name { get; set; }
         public decimal AverageReturn { get; set; }

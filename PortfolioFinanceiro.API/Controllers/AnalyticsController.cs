@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PortfolioFinanceiro.Business.Interfaces;
 using PortfolioFinanceiro.API.Utils;
 using PortfolioFinanceiro.Business.DTO;
+using PortfolioFinanceiro.Business.Interfaces;
 
 namespace PortfolioFinanceiro.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PortfoliosController(IPortfolioService service) : ControllerBase
+    public class AnalyticsController(IPerformanceCalculator performanceCalculator, IRebalancingOptimizer rebalancingOptimizer, IRiskAnalyzer riskAnalyzer) : ControllerBase
     {
-        private readonly IPortfolioService _service = service;
+        private readonly IPerformanceCalculator _performanceCalculatorService = performanceCalculator;
+        private readonly IRebalancingOptimizer _rebalancingOptimizerService = rebalancingOptimizer;
+        private readonly IRiskAnalyzer _riskAnalyzerService = riskAnalyzer;
 
         [HttpGet("{id}/performance")]
         public ActionResult<Perfomance> GetPerformance(string id)
@@ -19,24 +21,7 @@ namespace PortfolioFinanceiro.API.Controllers
                 if (!NumberHelper.IsNumeric(id))
                     throw new ArgumentException($"The number ({id}) isn't numeric");
 
-                Perfomance result = _service.Performance(id);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("{id}/risk-analysis")]
-        public ActionResult<RiskAnalysis> GetRiskAnalysis(string id)
-        {
-            try
-            {
-                if (!NumberHelper.IsNumeric(id))
-                    throw new ArgumentException($"The number ({id}) isn't numeric");
-
-                RiskAnalysis result = _service.RiskAnalysis(id);
+                Perfomance result = _performanceCalculatorService.Performance(id);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -53,7 +38,24 @@ namespace PortfolioFinanceiro.API.Controllers
                 if (!NumberHelper.IsNumeric(id))
                     throw new ArgumentException($"The number ({id}) isn't numeric");
 
-                RebalancingSuggestions result = _service.Rebalancing(id);
+                RebalancingSuggestions result = _rebalancingOptimizerService.Rebalancing(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}/risk-analysis")]
+        public ActionResult<RiskAnalysis> GetRiskAnalysis(string id)
+        {
+            try
+            {
+                if (!NumberHelper.IsNumeric(id))
+                    throw new ArgumentException($"The number ({id}) isn't numeric");
+
+                RiskAnalysis result = _riskAnalyzerService.RiskAnalysis(id);
                 return Ok(result);
             }
             catch (Exception ex)

@@ -1,6 +1,6 @@
 ﻿namespace PortfolioFinanceiro.Business.Models
 {
-    internal class Asset
+    public class Asset
     {
         public required string Symbol { get; set; }
         public required string Name { get; set; }
@@ -11,8 +11,10 @@
         public List<PriceHistory> PriceHistory { get; set; } = [];
     }
 
-    internal class PriceHistory
+    public class PriceHistory
     {
+        public Guid Guid { get; set; } = Guid.NewGuid();
+        public required string Symbol { get; set; }
         public DateTime Date { get; set; }
         public decimal Price { get; set; }
     }

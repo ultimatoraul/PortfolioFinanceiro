@@ -1,8 +1,10 @@
-﻿namespace PortfolioFinanceiro.Business.Models
+﻿using System.Text.Json.Serialization;
+
+namespace PortfolioFinanceiro.Business.Models
 {
-    internal class Portfolio
+    public class Portfolio
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public required string Name { get; set; }
         public required string UserId { get; set; }
         public decimal TotalInvestment { get; set; }
@@ -10,8 +12,9 @@
         public List<Position> Positions { get; set; } = [];
     }
 
-    internal class Position
+    public class Position
     {
+        [JsonPropertyName("assetSymbol")]
         public required string Symbol { get; set; }
         public int Quantity { get; set; }
         public decimal AveragePrice { get; set; }

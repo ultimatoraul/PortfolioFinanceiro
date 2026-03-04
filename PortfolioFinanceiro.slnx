@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="PortfolioFinanceiro.API/PortfolioFinanceiro.API.csproj" />
   <Project Path="PortfolioFinanceiro.Business/PortfolioFinanceiro.Business.csproj" />
-  <Project Path="PortfolioFinanceiro/PortfolioFinanceiro.API.csproj" />
+  <Project Path="PortfolioFinanceiro.Data/PortfolioFinanceiro.Data.csproj" />
 </Solution>

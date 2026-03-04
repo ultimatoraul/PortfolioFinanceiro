@@ -9,6 +9,5 @@ namespace PortfolioFinanceiro.API.Validations
             if (!NumberHelper.IsNumeric(id))
                 throw new ArgumentException($"The number ({id}) isn't numeric");
         }
-
     }
 }

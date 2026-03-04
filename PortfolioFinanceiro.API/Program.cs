@@ -1,13 +1,23 @@
+using PortfolioFinanceiro.Business.Interfaces;
+using PortfolioFinanceiro.Business.Services;
+using PortfolioFinanceiro.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddScoped<IPerformanceCalculator, PerformanceCalculator>();
+builder.Services.AddScoped<IRebalancingOptimizer, RebalancingOptimizer>();
+builder.Services.AddScoped<IRiskAnalyzer, RiskAnalyzer>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddInMemoryDataContext("PortfolioDb");
+
 var app = builder.Build();
+
+await app.Services.InitializeDatabaseAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -22,4 +32,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();

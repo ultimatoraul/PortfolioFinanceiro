@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PortfolioFinanceiro.Business\PortfolioFinanceiro.Business.csproj" />
+    <ProjectReference Include="..\PortfolioFinanceiro.Data\PortfolioFinanceiro.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,10 +2,11 @@
 
 namespace PortfolioFinanceiro.Business.Interfaces
 {
-    public interface IPortfolioService
+    /// <summary>
+    /// Algoritmos de performance
+    /// </summary>
+    public interface IPerformanceCalculator
     {
         Perfomance Performance(string id);
-        RiskAnalysis RiskAnalysis(string id);
-        RebalancingSuggestions Rebalancing(string id);
     }
 }
