@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PortfolioFinanceiro.Business/PortfolioFinanceiro.Business.csproj" />
+  <Project Path="PortfolioFinanceiro/PortfolioFinanceiro.API.csproj" />
+</Solution>
