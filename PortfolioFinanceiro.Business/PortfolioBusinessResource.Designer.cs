@@ -70,6 +70,15 @@ namespace PortfolioFinanceiro.Business {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Portfólio vazio ou não encontrado.
+        /// </summary>
+        internal static string PortfolioEmptyOrNotFound {
+            get {
+                return ResourceManager.GetString("PortfolioEmptyOrNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Portfolio não possui posições.
         /// </summary>
         internal static string PortfolioHasNoPositions {
@@ -93,6 +102,15 @@ namespace PortfolioFinanceiro.Business {
         internal static string PortfolioIdInvalid {
             get {
                 return ResourceManager.GetString("PortfolioIdInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Portfólio sem valor calculável.
+        /// </summary>
+        internal static string PortfolioWithoutValue {
+            get {
+                return ResourceManager.GetString("PortfolioWithoutValue", resourceCulture);
             }
         }
     }

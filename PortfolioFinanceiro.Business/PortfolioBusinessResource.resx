@@ -129,4 +129,10 @@
   <data name="MarketDataNotFound" xml:space="preserve">
     <value>MarketData não encontrado</value>
   </data>
+  <data name="PortfolioEmptyOrNotFound" xml:space="preserve">
+    <value>Portfólio vazio ou não encontrado</value>
+  </data>
+  <data name="PortfolioWithoutValue" xml:space="preserve">
+    <value> Portfólio sem valor calculável</value>
+  </data>
 </root>

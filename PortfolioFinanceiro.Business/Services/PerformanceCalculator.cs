@@ -1,6 +1,7 @@
 ﻿using PortfolioFinanceiro.Business.DTO;
 using PortfolioFinanceiro.Business.Interfaces.Repositories;
 using PortfolioFinanceiro.Business.Interfaces.Services;
+using PortfolioFinanceiro.Business.Utils;
 
 namespace PortfolioFinanceiro.Business.Services
 {
@@ -30,7 +31,7 @@ namespace PortfolioFinanceiro.Business.Services
                 // Calcular a Variação Percentual do Ativo (ROI) por meio de regra de três composta:
                 // (ValorDaPosicaoAtual - ValorInvestido) * 100 / ValorInvestido
                 decimal positionReturn = investedAmount > 0
-                    ? (currentPositionValue - investedAmount) * 100 / investedAmount
+                    ? FinancialCalculator.ReturnOfInvestmentPercentual(currentPositionValue, investedAmount)
                     : 0;
 
                 // Calcular o valor total investido e do portfolio atual
@@ -51,7 +52,7 @@ namespace PortfolioFinanceiro.Business.Services
             foreach (var positionPerf in performanceResult.PositionsPerformance!)
             {
                 positionPerf.Weight = performanceResult.CurrentValue > 0
-                        ? (positionPerf.CurrentValue / performanceResult.CurrentValue) * 100
+                        ? FinancialCalculator.WeightPercentual(positionPerf.CurrentValue, performanceResult.CurrentValue)
                         : 0;
             }
 
@@ -102,7 +103,7 @@ namespace PortfolioFinanceiro.Business.Services
                     var previousPrice = priceHistoryObj[i - 1].Price;
                     if (previousPrice > 0)
                     {
-                        var dailyReturn = ((priceHistoryObj[i].Price - previousPrice) / previousPrice) * 100;
+                        var dailyReturn = FinancialCalculator.DailyReturnPercentual(priceHistoryObj[i].Price, previousPrice);
                         dailyReturns.Add(dailyReturn);
                     }
                 }

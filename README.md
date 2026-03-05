@@ -2,8 +2,8 @@
 
 ## 📊 PortfolioFinanceiro.API
 
-Trata-se de uma API dotNet 8.0 que oferece análises avançadas para portfólios de investimentos. 
-O objetivo é fornecer insights sobre performance, risco e sugestões de rebalanceamento com base em dados pré-carregados.
+Trata-se de uma API dotNet 8.0 que oferece análises avançadas para portfólios de investimentos.  
+O objetivo é fornecer insights sobre performance, risco e sugestões de rebalanceamento com base em dados pré-carregados.  
 A API conta com Swagger/OpenAPI configurado.
 
 ### Analytics Controller
@@ -35,11 +35,11 @@ Na pasta do Projeto PortfolioFinanceiro.Business.xUnit, execute o comando:
 
 ## 📊 Dados Fornecidos
 
-Projeto contém um SeedData.json pré configurado no projeto PortfolioFinanceiro.Data, podendo ser substituido para testar diferentes cenários. 
+Projeto contém um SeedData.json pré configurado no projeto PortfolioFinanceiro.Data, podendo ser substituido para testar diferentes cenários.   
 O formato deve ser mantido para garantir a compatibilidade com os endpoints.
 
-A base atual está sendo alimentada por um **`SeedData.json`** com:
-- **15 ativos** da bolsa brasileira (PETR4, VALE3, ITUB4, etc.)
+A base atual está sendo alimentada por um **`SeedData.json`** com:  
+- **15 ativos** da bolsa brasileira (PETR4, VALE3, ITUB4, etc.)  
 - **3 portfólios** com diferentes estratégias (Conservador, Crescimento, Dividendos)
 - **Histórico de preços** (30 dias) para 5 ativos principais
 - **Market data** (Taxa Selic, Ibovespa)
@@ -176,13 +176,13 @@ Retorna o RebalancingOptimizer:
 Para essa solução foi utilizado o apoio da IA Claude Haiku 4.5, facilitando na construção dos Testes Unitários gerando mocks, no detalhamento da documentação, em um melhor entendimento das regras financeiras requisitadas.
 
 ### Comentários Adicionais:
-Na Etapa Risk Analysis, tive dificuldade para determinar qual seria o calculo para determinar o overallRisk, então optei por uma classificação simples, em uma função em RiskFunctions.DetermineOverallRisk(), obtendo mais detalhes dos requisitos uma atualização será necessárias.
+Na Etapa Risk Analysis, tive dificuldade para determinar qual seria o calculo para determinar o overallRisk, então optei por uma classificação simples, em uma função em RiskFunctions.DetermineOverallRisk(), ao obter mais detalhes dos requisitos uma atualização será necessária.
 
 ### Pontos a melhorar:
-Evoluir a documentação do Swagger
-Adicionar logs estruturados para debug dos cálculos
-Testes de integração
-Algoritmo de otimização de rebalanceamento avançado
+Evoluir a documentação do Swagger  
+Adicionar logs estruturados para debug dos cálculos  
+Testes de integração  
+Algoritmo de otimização de rebalanceamento avançado  
 Implementar a FinancialCalculator
 
 
