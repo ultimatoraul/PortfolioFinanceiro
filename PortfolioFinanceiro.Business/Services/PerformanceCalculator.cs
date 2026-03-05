@@ -7,16 +7,14 @@ namespace PortfolioFinanceiro.Business.Services
     public class PerformanceCalculator(IPortfolioRepository repository) : IPerformanceCalculator
     {
         private readonly IPortfolioRepository _repository = repository;
-
-       
-        public PerfomanceResult ByPortfolioId(long id)
+        public PerfomanceResponse ByPortfolioId(long id)
         {
             var portfolioObj = _repository.GetPortfolioWithPositions(id);
 
             if (portfolioObj == null)
                 throw new InvalidOperationException(PortfolioBusinessResource.PortfolioIdInvalid + $" ({id})");
 
-            var performanceResult = new PerfomanceResult();
+            var performanceResult = new PerfomanceResponse();
 
             // Calcular o valor atual de cada posição (positionsPerformance)
             foreach (var position in portfolioObj.Positions!)

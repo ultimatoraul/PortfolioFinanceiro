@@ -5,7 +5,7 @@ namespace PortfolioFinanceiro.Business.Services
 {
     public class RebalancingOptimizer : IRebalancingOptimizer
     {
-        public RebalancingSuggestions ByPortfolioId(long id)
+        public RebalancingSuggestionsResponse ByPortfolioId(long id)
         {
             throw new NotImplementedException();
         }

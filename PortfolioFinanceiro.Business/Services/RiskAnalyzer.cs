@@ -11,8 +11,7 @@ namespace PortfolioFinanceiro.Business.Services
         private readonly IPortfolioRepository _portfolioRepository = portfolioRepository;
         private readonly IMarketDataRepository _marketDataRepository = marketDataRepository;
 
-
-        public RiskAnalysisResult ByPortfolioId(long id)
+        public RiskAnalysisResponse ByPortfolioId(long id)
         {
             var portfolio = _portfolioRepository.GetPortfolioWithPositions(id);
 
@@ -71,7 +70,7 @@ namespace PortfolioFinanceiro.Business.Services
             // Gerar recomendações
             var recommendations = RiskFunctions.GenerateRecommendations(positionPercentages, sectorAllocation);
 
-            return new RiskAnalysisResult
+            return new RiskAnalysisResponse
             {
                 OverallRisk = overallRisk,
                 SharpeRatio = sharpeRatio,

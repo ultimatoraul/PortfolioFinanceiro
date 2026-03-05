@@ -10,7 +10,6 @@
         private const decimal MediumSectorLower = 0.25m; // 25%
         private const decimal HighSectorLimit = 0.40m; // 40%
 
-
         internal static string DetermineSectorRisk(decimal sectorPercentage)
         {
             if (sectorPercentage > HighSectorLimit)

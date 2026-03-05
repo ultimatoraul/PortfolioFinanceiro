@@ -45,7 +45,6 @@ A base atual está sendo alimentada por um **`SeedData.json`** com:
 - **Market data** (Taxa Selic, Ibovespa)
 
 
-
 ## 🏗️ Estrutura da Solução
 
 ```
@@ -172,5 +171,19 @@ Retorna o RebalancingOptimizer:
 ---
 
 
-Comentários Adicionais:
-Na Etapa Risk Analysis, tive dificuldade para determinar qual seria o calculo para determinar o overallRisk, então optei por uma classificação simples, em uma função em RiskFunctions.DetermineOverallRisk(), desse modo obtendo mais detalhes seria um ponto a ser atualizado.
+## ❓ FAQ
+
+Para essa solução foi utilizado o apoio da IA Claude Haiku 4.5, facilitando na construção dos Testes Unitários gerando mocks, no detalhamento da documentação, em um melhor entendimento das regras financeiras requisitadas.
+
+### Comentários Adicionais:
+Na Etapa Risk Analysis, tive dificuldade para determinar qual seria o calculo para determinar o overallRisk, então optei por uma classificação simples, em uma função em RiskFunctions.DetermineOverallRisk(), obtendo mais detalhes dos requisitos uma atualização será necessárias.
+
+### Pontos a melhorar:
+Evoluir a documentação do Swagger
+Adicionar logs estruturados para debug dos cálculos
+Testes de integração
+Algoritmo de otimização de rebalanceamento avançado
+Implementar a FinancialCalculator
+
+
+---

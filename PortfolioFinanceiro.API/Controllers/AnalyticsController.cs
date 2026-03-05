@@ -15,14 +15,14 @@ namespace PortfolioFinanceiro.API.Controllers
 
 
         [HttpGet("{id}/performance-analysis")]
-        public ActionResult<PerfomanceResult> GetPerformanceAnalysis(string id)
+        public ActionResult<PerfomanceResponse> GetPerformanceAnalysis(string id)
         {
             try
             {
                 if (!NumberHelper.IsLongType(id))
                     throw new ArgumentException(PortfolioAPIResource.PortfolioIdInvalid);
 
-                PerfomanceResult result = _performanceCalculatorService.ByPortfolioId(NumberHelper.StringToLong(id));
+                PerfomanceResponse result = _performanceCalculatorService.ByPortfolioId(NumberHelper.StringToLong(id));
                 return Ok(result);
             }
             catch (Exception ex)
@@ -32,14 +32,14 @@ namespace PortfolioFinanceiro.API.Controllers
         }
 
         [HttpGet("{id}/rebalacing")]
-        public ActionResult<RebalancingSuggestions> GetRebalancing(string id)
+        public ActionResult<RebalancingSuggestionsResponse> GetRebalancing(string id)
         {
             try
             {
                 if (!NumberHelper.IsLongType(id))
                     throw new ArgumentException(PortfolioAPIResource.PortfolioIdInvalid);
 
-                RebalancingSuggestions result = _rebalancingOptimizerService.ByPortfolioId(NumberHelper.StringToLong(id));
+                RebalancingSuggestionsResponse result = _rebalancingOptimizerService.ByPortfolioId(NumberHelper.StringToLong(id));
                 return Ok(result);
             }
             catch (Exception ex)
@@ -49,14 +49,14 @@ namespace PortfolioFinanceiro.API.Controllers
         }
 
         [HttpGet("{id}/risk-analysis")]
-        public ActionResult<RiskAnalysisResult> GetRiskAnalysis(string id)
+        public ActionResult<RiskAnalysisResponse> GetRiskAnalysis(string id)
         {
             try
             {
                 if (!NumberHelper.IsLongType(id))
                     throw new ArgumentException(PortfolioAPIResource.PortfolioIdInvalid);
 
-                RiskAnalysisResult result = _riskAnalyzerService.ByPortfolioId(NumberHelper.StringToLong(id));
+                RiskAnalysisResponse result = _riskAnalyzerService.ByPortfolioId(NumberHelper.StringToLong(id));
                 return Ok(result);
             }
             catch (Exception ex)

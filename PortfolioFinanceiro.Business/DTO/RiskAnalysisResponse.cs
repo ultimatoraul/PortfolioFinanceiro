@@ -1,9 +1,9 @@
 ﻿namespace PortfolioFinanceiro.Business.DTO
 {
-    public class RiskAnalysisResult
+    public class RiskAnalysisResponse
     {
-        public required string OverallRisk { get; set; }
         private decimal _sharpeRatio;
+        public required string OverallRisk { get; set; }
         public decimal SharpeRatio
         {
             get => _sharpeRatio;
@@ -27,8 +27,8 @@
 
     public class LargestPosition
     {
-        public required string Symbol { get; set; }
         private decimal _percentage;
+        public required string Symbol { get; set; }
         public decimal Percentage
         {
             get => _percentage;
@@ -38,10 +38,9 @@
 
     public class SectorDiversification
     {
+        private decimal _percentage;
         public required string Sector { get; set; }
         public required string Risk { get; set; }
-
-        private decimal _percentage;
         public decimal Percentage
         {
             get => _percentage;

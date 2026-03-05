@@ -1,6 +1,6 @@
 ﻿namespace PortfolioFinanceiro.Business.DTO
 {
-    public class PerfomanceResult
+    public class PerfomanceResponse
     {
         private decimal _totalInvestment;
         private decimal _currentValue;  
@@ -8,7 +8,6 @@
         private decimal _totalReturnAmount;
         private decimal _annualizedReturn;
         private decimal? _volatility;
-
         public decimal TotalInvestment 
         { 
             get => _totalInvestment;
@@ -56,25 +55,21 @@
         private decimal _weight;
 
         public required string Symbol { get; set; }
-
         public decimal InvestedAmount 
         { 
             get => _investedAmount;
             set => _investedAmount = Math.Round(value, 2);
         }
-
         public decimal CurrentValue 
         { 
             get => _currentValue;
             set => _currentValue = Math.Round(value, 2);
         }
-
         public decimal Return 
         { 
             get => _return;
             set => _return = Math.Round(value, 2);
         }
-
         public decimal Weight 
         { 
             get => _weight;
