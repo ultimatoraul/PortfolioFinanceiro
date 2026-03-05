@@ -13,8 +13,8 @@
 
     public class PriceHistory
     {
-        public Guid Guid { get; set; } = Guid.NewGuid();
-        public required string Symbol { get; set; }
+        public Guid Id { get; set; }
+        public string? Symbol { get; set; }
         public DateTime Date { get; set; }
         public decimal Price { get; set; }
     }

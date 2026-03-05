@@ -1,5 +1,5 @@
 ﻿using PortfolioFinanceiro.Business.DTO;
-using PortfolioFinanceiro.Business.Interfaces;
+using PortfolioFinanceiro.Business.Interfaces.Services;
 
 namespace PortfolioFinanceiro.Business.Services
 {

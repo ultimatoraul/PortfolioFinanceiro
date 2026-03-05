@@ -1,10 +1,12 @@
-using PortfolioFinanceiro.Business.Interfaces;
+using PortfolioFinanceiro.Business.Interfaces.Repositories;
+using PortfolioFinanceiro.Business.Interfaces.Services;
 using PortfolioFinanceiro.Business.Services;
 using PortfolioFinanceiro.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 builder.Services.AddScoped<IPerformanceCalculator, PerformanceCalculator>();
 builder.Services.AddScoped<IRebalancingOptimizer, RebalancingOptimizer>();
 builder.Services.AddScoped<IRiskAnalyzer, RiskAnalyzer>();

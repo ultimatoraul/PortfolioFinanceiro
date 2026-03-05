@@ -8,6 +8,7 @@ namespace PortfolioFinanceiro.Data
     {
         public DbSet<Asset> Assets { get; set; }
         public DbSet<Portfolio> Portfolios { get; set; }
+        public DbSet<MarketData> MarketData { get; set; }
         public DbSet<PriceHistory> PriceHistory { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
@@ -22,6 +23,10 @@ namespace PortfolioFinanceiro.Data
             modelBuilder.Entity<Asset>()
                 .HasKey(a => a.Symbol);
 
+            // Configurar PriceHistory
+            modelBuilder.Entity<PriceHistory>()
+                .HasKey(ph => ph.Id);
+
             // Configurar Portfolio
             modelBuilder.Entity<Portfolio>()
                 .HasKey(p => p.Id);
@@ -29,9 +34,15 @@ namespace PortfolioFinanceiro.Data
             modelBuilder.Entity<Portfolio>()
                 .OwnsMany(p => p.Positions);
 
-            // Configurar Portfolio
-            modelBuilder.Entity<PriceHistory>()
-                .HasKey(p => p.Guid);
+            // Configurar MarketData
+            modelBuilder.Entity<MarketData>()
+                .HasKey(m => m.Id);
+
+            modelBuilder.Entity<MarketData>()
+                .OwnsMany(m => m.Sectors);
+
+            modelBuilder.Entity<MarketData>()
+                .OwnsMany(m => m.IndexPerformance);
 
             // Carregar dados do SeedData.json
             SeedDatabase(modelBuilder);
@@ -56,30 +67,31 @@ namespace PortfolioFinanceiro.Data
                 using var document = JsonDocument.Parse(json);
                 var root = document.RootElement;
 
-                // Seed Assets
+                #region Seed Assets
                 if (root.TryGetProperty("assets", out var assetsElement))
                 {
-                    var assets = JsonSerializer.Deserialize<List<Asset>>(
+                    var assetsObj = JsonSerializer.Deserialize<List<Asset>>(
                         assetsElement.GetRawText(),
                         options
                     );
 
-                    if (assets != null)
-                        modelBuilder.Entity<Asset>().HasData(assets);
+                    if (assetsObj != null)
+                        modelBuilder.Entity<Asset>().HasData(assetsObj);
                 }
+                #endregion
 
-                // Seed Portfolios
+                #region Seed Portfolios
                 if (root.TryGetProperty("portfolios", out var portfoliosElement))
                 {
-                    var portfolios = JsonSerializer.Deserialize<List<Portfolio>>(
+                    var portfoliosObj = JsonSerializer.Deserialize<List<Portfolio>>(
                         portfoliosElement.GetRawText(),
                         options
                     );
 
-                    if (portfolios != null)
+                    if (portfoliosObj != null)
                     {
                         modelBuilder.Entity<Portfolio>().HasData(
-                            portfolios.Select((p, index) => new { p, Id = index + 1 })
+                            portfoliosObj.Select((p, index) => new { p, Id = index + 1 })
                                 .Select(x => new Portfolio
                                 {
                                     Id = x.Id,
@@ -91,6 +103,105 @@ namespace PortfolioFinanceiro.Data
                         );
                     }
                 }
+                #endregion
+
+                #region Seed MarketData
+                if (root.TryGetProperty("marketData", out var marketDataElement))
+                {
+                    var marketDataObj = marketDataElement.GetProperty("selicRate");
+                    var selicRate = marketDataObj.GetDecimal();
+
+                    var marketDataGuid = Guid.NewGuid();
+
+                    // Seed only scalar properties for MarketData
+                    modelBuilder.Entity<MarketData>().HasData(
+                        new MarketData
+                        {
+                            Id = marketDataGuid,
+                            SelicRate = selicRate
+                        }
+                    );
+
+                    // Seed IndexPerformance as owned collection
+                    var indexPerformanceList = new List<IndexPerformance>();
+                    if (marketDataElement.TryGetProperty("indexPerformance", out var indexPerfElement))
+                    {
+                        foreach (var property in indexPerfElement.EnumerateObject())
+                        {
+                            var indexPerf = JsonSerializer.Deserialize<IndexPerformance>(
+                                property.Value.GetRawText(),
+                                options
+                            );
+                            if (indexPerf != null)
+                            {
+                                indexPerf.Id = Guid.NewGuid();
+                                indexPerf.Index = property.Name;
+                                indexPerf.MarketDataId = marketDataGuid;
+                                indexPerformanceList.Add(indexPerf);
+                            }
+                        }
+                    }
+
+                    if (indexPerformanceList.Any())
+                    {
+                        modelBuilder.Entity<MarketData>()
+                            .OwnsMany(m => m.IndexPerformance)
+                            .HasData(indexPerformanceList);
+                    }
+
+                    // Seed Sectors as owned collection
+                    var sectorsList = new List<SectorData>();
+                    if (marketDataElement.TryGetProperty("sectors", out var sectorsElement))
+                    {
+                        sectorsList = JsonSerializer.Deserialize<List<SectorData>>(
+                            sectorsElement.GetRawText(),
+                            options
+                        ) ?? [];
+
+                        foreach (var sector in sectorsList)
+                        {
+                            sector.Id = Guid.NewGuid();
+                            sector.MarketDataId = marketDataGuid;
+                        }
+                    }
+
+                    if (sectorsList.Any())
+                    {
+                        modelBuilder.Entity<MarketData>()
+                            .OwnsMany(m => m.Sectors)
+                            .HasData(sectorsList);
+                    }
+                }
+                #endregion
+
+                #region Seed PriceHistory
+                var priceHistoryList = new List<PriceHistory>();
+                if (root.TryGetProperty("priceHistory", out var priceHistoryElement))
+                {
+                    foreach (var property in priceHistoryElement.EnumerateObject())
+                    {
+                        var priceHistoriesObj = JsonSerializer.Deserialize<List<PriceHistory>>(
+                            property.Value.GetRawText(),
+                            options
+                        );
+
+                        foreach (var priceHistoryObj in priceHistoriesObj!)
+                        {
+                            if (priceHistoryObj != null)
+                            {
+                                priceHistoryObj.Id = Guid.NewGuid();
+                                priceHistoryObj.Symbol = property.Name;
+                                priceHistoryList.Add(priceHistoryObj);
+                            }
+                        }
+                    }
+                }
+                if (priceHistoryList.Any())
+                {
+                    modelBuilder.Entity<PriceHistory>()
+                        .HasData(priceHistoryList);
+                }
+                #endregion
             }
             catch (Exception ex)
             {
