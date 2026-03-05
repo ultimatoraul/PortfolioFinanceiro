@@ -5,7 +5,7 @@ namespace PortfolioFinanceiro.Business.Services
 {
     public class RiskAnalyzer : IRiskAnalyzer
     {
-        public RiskAnalysis RiskAnalysis(string id)
+        public RiskAnalysis RiskAnalysis(long id)
         {
             throw new NotImplementedException();
         }

@@ -7,6 +7,6 @@ namespace PortfolioFinanceiro.Business.Interfaces.Services
     /// </summary>
     public interface IRebalancingOptimizer
     {
-        RebalancingSuggestions Rebalancing(string id);
+        RebalancingSuggestions Rebalancing(long id);
     }
 }

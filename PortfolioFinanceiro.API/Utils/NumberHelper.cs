@@ -2,13 +2,11 @@
 {
     public class NumberHelper
     {
-        static internal decimal StringToDecimal(string strNumber)
+        static internal long StringToLong(string strNumber)
         {
 
-            if (decimal.TryParse(strNumber,
-                System.Globalization.NumberStyles.Any,
-                System.Globalization.NumberFormatInfo.InvariantInfo,
-                out decimal result))
+            if (long.TryParse(strNumber,
+                out long result))
             {
                 return result;
             }
@@ -16,12 +14,11 @@
             throw new ArgumentException("Invalid strNumber");
         }
 
-        static internal bool IsNumeric(string strNumber)
+
+        static internal bool IsLongType(string strNumber)
         {
-            if (decimal.TryParse(strNumber,
-                System.Globalization.NumberStyles.Any,
-                System.Globalization.NumberFormatInfo.InvariantInfo,
-                out decimal result))
+            if (long.TryParse(strNumber,
+                out long result))
             {
                 return true;
             }

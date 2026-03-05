@@ -7,6 +7,6 @@ namespace PortfolioFinanceiro.Business.Interfaces.Services
     /// </summary>
     public interface IRiskAnalyzer
     {
-        RiskAnalysis RiskAnalysis(string id);
+        RiskAnalysis RiskAnalysis(long id);
     }
 }

@@ -15,14 +15,14 @@ namespace PortfolioFinanceiro.API.Controllers
 
 
         [HttpGet("{id}/performance-analysis")]
-        public ActionResult<Perfomance> GetPerformanceAnalysis(long id)
+        public ActionResult<Perfomance> GetPerformanceAnalysis(string id)
         {
             try
             {
-                //if (!NumberHelper.IsNumeric(id))
-                //    throw new ArgumentException($"The number ({id}) isn't numeric");
+                if (!NumberHelper.IsLongType(id))
+                    throw new ArgumentException(PortfolioResource.PortfolioIdInvalid);
 
-                Perfomance result = _performanceCalculatorService.ToAnalyze(id);
+                Perfomance result = _performanceCalculatorService.ToAnalyze(NumberHelper.StringToLong(id));
                 return Ok(result);
             }
             catch (Exception ex)
@@ -36,10 +36,10 @@ namespace PortfolioFinanceiro.API.Controllers
         {
             try
             {
-                if (!NumberHelper.IsNumeric(id))
-                    throw new ArgumentException($"The number ({id}) isn't numeric");
+                if (!NumberHelper.IsLongType(id))
+                    throw new ArgumentException(PortfolioResource.PortfolioIdInvalid);
 
-                RebalancingSuggestions result = _rebalancingOptimizerService.Rebalancing(id);
+                RebalancingSuggestions result = _rebalancingOptimizerService.Rebalancing(NumberHelper.StringToLong(id));
                 return Ok(result);
             }
             catch (Exception ex)
@@ -53,10 +53,10 @@ namespace PortfolioFinanceiro.API.Controllers
         {
             try
             {
-                if (!NumberHelper.IsNumeric(id))
-                    throw new ArgumentException($"The number ({id}) isn't numeric");
+                if (!NumberHelper.IsLongType(id))
+                    throw new ArgumentException(PortfolioResource.PortfolioIdInvalid);
 
-                RiskAnalysis result = _riskAnalyzerService.RiskAnalysis(id);
+                RiskAnalysis result = _riskAnalyzerService.RiskAnalysis(NumberHelper.StringToLong(id));
                 return Ok(result);
             }
             catch (Exception ex)
