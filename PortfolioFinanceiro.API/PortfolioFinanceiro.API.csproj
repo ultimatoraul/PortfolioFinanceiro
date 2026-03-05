@@ -19,18 +19,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="PortfolioResource.Designer.cs">
+    <Compile Update="PortfolioAPIResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>PortfolioResource.resx</DependentUpon>
+      <DependentUpon>PortfolioAPIResource.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="PortfolioResource.resx">
+    <EmbeddedResource Update="PortfolioAPIResource.resx">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>PortfolioResource.Designer.cs</LastGenOutput>
+      <LastGenOutput>PortfolioAPIResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

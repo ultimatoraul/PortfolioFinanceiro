@@ -22,14 +22,14 @@ namespace PortfolioFinanceiro.API {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class PortfolioResource {
+    internal class PortfolioAPIResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PortfolioResource() {
+        internal PortfolioAPIResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PortfolioFinanceiro.API {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PortfolioFinanceiro.API.PortfolioResource", typeof(PortfolioResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PortfolioFinanceiro.API.PortfolioAPIResource", typeof(PortfolioAPIResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace PortfolioFinanceiro.API {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Id informado não é válido.
+        ///   Looks up a localized string similar to Portfolio Id informado não é válido.
         /// </summary>
         internal static string PortfolioIdInvalid {
             get {

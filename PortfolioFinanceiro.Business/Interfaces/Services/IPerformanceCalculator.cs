@@ -7,6 +7,6 @@ namespace PortfolioFinanceiro.Business.Interfaces.Services
     /// </summary>
     public interface IPerformanceCalculator
     {
-        Perfomance ToAnalyze(long id);
+        PerfomanceResult ToAnalyze(long id);
     }
 }

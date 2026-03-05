@@ -5,8 +5,8 @@
         public required string OverallRisk { get; set; }
         public decimal SharpeRatio { get; set; }
         public required ConcentrationRisk ConcentrationRisk { get; set; }
-        public List<SectorDiversification> SectorDiversification { get; set; } = new();
-        public List<string> Recommendations { get; set; } = new();
+        public List<SectorDiversification> SectorDiversification { get; set; } = [];
+        public List<string> Recommendations { get; set; } = [];
     }
 
     public class ConcentrationRisk

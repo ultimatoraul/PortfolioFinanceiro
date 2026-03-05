@@ -101,7 +101,6 @@ namespace PortfolioFinanceiro.Data
                                 Id = portfolioIndex,
                                 Name = p.Name,
                                 UserId = p.UserId,
-                                TotalInvestment = p.TotalInvestment,
                                 CreatedAt = p.CreatedAt
                             };
 
@@ -230,7 +229,8 @@ namespace PortfolioFinanceiro.Data
                         }
                     }
                 }
-                if (priceHistoryList.Any())
+
+                if (priceHistoryList.Count != 0)
                 {
                     modelBuilder.Entity<PriceHistory>()
                         .HasData(priceHistoryList);
