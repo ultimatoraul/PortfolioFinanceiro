@@ -374,6 +374,17 @@ namespace PortfolioFinanceiro.Business.xUnit
         }
     }
 
+    /// <summary>
+    /// Implementação substituta de IPortfolioRepository para testes.
+    /// 
+    /// Esta classe permite configurar dados de portfólio, ativos e histórico de preços
+    /// sem depender do banco de dados real, facilitando testes rápidos e isolados.
+    /// 
+    /// Métodos principais:
+    /// - SetPortfolioWithPositions: Configura o portfólio a ser retornado
+    /// - SetAsset: Configura um ativo para ser retornado
+    /// - SetPriceHistory: Configura o histórico de preços de um símbolo
+    /// </summary>
     // Implementação do IPortfolioRepository para Testes
     public class PortfolioRepositoryStub : IPortfolioRepository
     {

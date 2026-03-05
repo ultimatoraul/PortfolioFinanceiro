@@ -8,6 +8,7 @@ namespace PortfolioFinanceiro.Business.Services
     {
         private readonly IPortfolioRepository _repository = repository;
 
+       
         public PerfomanceResult ToAnalyze(long id)
         {
             var portfolioObj = _repository.GetPortfolioWithPositions(id);
@@ -76,6 +77,16 @@ namespace PortfolioFinanceiro.Business.Services
             return performanceResult;
         }
 
+        /// <summary>
+        /// Calcula a volatilidade (desvio padrão) dos retornos diários do portfólio. <br/>
+        /// A volatilidade é uma medida de risco que indica como o preço dos ativos
+        /// flutua ao longo do tempo. 
+        /// </summary>
+        /// <param name="positions">Lista de posições do portfólio.</param>
+        /// <returns>
+        /// Desvio padrão dos retornos diários em percentual. <br/>
+        /// Retorna null se não houver histórico de preços suficiente (menos de 2 preços por ativo).
+        /// </returns>
         private decimal? CalculateVolatility(List<Models.Position> positions)
         {
             var dailyReturns = new List<decimal>();
