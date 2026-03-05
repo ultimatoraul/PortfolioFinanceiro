@@ -5,9 +5,9 @@ using PortfolioFinanceiro.Business.Interfaces.Services;
 
 namespace PortfolioFinanceiro.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/portfolios")]
     [ApiController]
-    public class PortfolioController(IPerformanceCalculator performanceCalculator, IRebalancingOptimizer rebalancingOptimizer, IRiskAnalyzer riskAnalyzer) : ControllerBase
+    public class AnalyticsController(IPerformanceCalculator performanceCalculator, IRebalancingOptimizer rebalancingOptimizer, IRiskAnalyzer riskAnalyzer) : ControllerBase
     {
         private readonly IPerformanceCalculator _performanceCalculatorService = performanceCalculator;
         private readonly IRebalancingOptimizer _rebalancingOptimizerService = rebalancingOptimizer;

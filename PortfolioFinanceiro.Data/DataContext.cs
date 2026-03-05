@@ -4,16 +4,12 @@ using System.Text.Json;
 
 namespace PortfolioFinanceiro.Data
 {
-    public class DataContext : DbContext
+    public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
     {
         public DbSet<Asset> Assets { get; set; }
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<MarketData> MarketData { get; set; }
         public DbSet<PriceHistory> PriceHistory { get; set; }
-
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        {
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,13 +19,17 @@ namespace PortfolioFinanceiro.Data
             modelBuilder.Entity<Asset>()
                 .HasKey(a => a.Symbol);
 
-            // Configurar PriceHistory
+           // Configurar PriceHistory
             modelBuilder.Entity<PriceHistory>()
                 .HasKey(ph => ph.Id);
 
             // Configurar Portfolio
             modelBuilder.Entity<Portfolio>()
                 .HasKey(p => p.Id);
+
+            modelBuilder.Entity<Portfolio>()
+                .Property(p => p.Id)
+                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Portfolio>()
                 .OwnsMany(p => p.Positions);
@@ -48,7 +48,7 @@ namespace PortfolioFinanceiro.Data
             SeedDatabase(modelBuilder);
         }
 
-        private void SeedDatabase(ModelBuilder modelBuilder)
+        private static void SeedDatabase(ModelBuilder modelBuilder)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace PortfolioFinanceiro.Data
                         options
                     );
 
-                    if (assetsObj != null)
+                    if (assetsObj != null && assetsObj.Count > 0)
                         modelBuilder.Entity<Asset>().HasData(assetsObj);
                 }
                 #endregion
@@ -90,17 +90,54 @@ namespace PortfolioFinanceiro.Data
 
                     if (portfoliosObj != null)
                     {
-                        modelBuilder.Entity<Portfolio>().HasData(
-                            portfoliosObj.Select((p, index) => new { p, Id = index + 1 })
-                                .Select(x => new Portfolio
+                        var portfoliosList = new List<Portfolio>();
+                        var positionsList = new List<Position>();
+                        int portfolioIndex = 1;
+
+                        foreach (var p in portfoliosObj)
+                        {
+                            var newPortfolio = new Portfolio
+                            {
+                                Id = portfolioIndex,
+                                Name = p.Name,
+                                UserId = p.UserId,
+                                TotalInvestment = p.TotalInvestment,
+                                CreatedAt = p.CreatedAt
+                            };
+
+                            if (p.Positions != null)
+                            {
+                                int positionIndex = 1;
+                                foreach (var pos in p.Positions)
                                 {
-                                    Id = x.Id,
-                                    Name = x.p.Name,
-                                    UserId = x.p.UserId,
-                                    TotalInvestment = x.p.TotalInvestment,
-                                    CreatedAt = x.p.CreatedAt
-                                })
-                        );
+                                    var newPosition = new Position
+                                    {
+                                        Id = (portfolioIndex * 100) + positionIndex,
+                                        PortfolioId = portfolioIndex,
+                                        Symbol = pos.Symbol,
+                                        Quantity = pos.Quantity,
+                                        AveragePrice = pos.AveragePrice,
+                                        TargetAllocation = pos.TargetAllocation,
+                                        LastTransaction = pos.LastTransaction
+                                    };
+                                    positionsList.Add(newPosition);
+                                    positionIndex++;
+                                }
+                            }
+
+                            portfoliosList.Add(newPortfolio);
+                            portfolioIndex++;
+                        }
+
+                        modelBuilder.Entity<Portfolio>()
+                            .HasData(portfoliosList);
+
+                        if (positionsList.Count > 0)
+                        {
+                            modelBuilder.Entity<Portfolio>()
+                                .OwnsMany(p => p.Positions)
+                                .HasData(positionsList);
+                        }
                     }
                 }
                 #endregion
@@ -113,7 +150,6 @@ namespace PortfolioFinanceiro.Data
 
                     var marketDataGuid = Guid.NewGuid();
 
-                    // Seed only scalar properties for MarketData
                     modelBuilder.Entity<MarketData>().HasData(
                         new MarketData
                         {
@@ -122,7 +158,6 @@ namespace PortfolioFinanceiro.Data
                         }
                     );
 
-                    // Seed IndexPerformance as owned collection
                     var indexPerformanceList = new List<IndexPerformance>();
                     if (marketDataElement.TryGetProperty("indexPerformance", out var indexPerfElement))
                     {
@@ -142,14 +177,13 @@ namespace PortfolioFinanceiro.Data
                         }
                     }
 
-                    if (indexPerformanceList.Any())
+                    if (indexPerformanceList.Count != 0)
                     {
                         modelBuilder.Entity<MarketData>()
                             .OwnsMany(m => m.IndexPerformance)
                             .HasData(indexPerformanceList);
                     }
 
-                    // Seed Sectors as owned collection
                     var sectorsList = new List<SectorData>();
                     if (marketDataElement.TryGetProperty("sectors", out var sectorsElement))
                     {
@@ -165,7 +199,7 @@ namespace PortfolioFinanceiro.Data
                         }
                     }
 
-                    if (sectorsList.Any())
+                    if (sectorsList.Count != 0)
                     {
                         modelBuilder.Entity<MarketData>()
                             .OwnsMany(m => m.Sectors)

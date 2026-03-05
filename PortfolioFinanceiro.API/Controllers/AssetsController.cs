@@ -86,7 +86,7 @@ namespace PortfolioFinanceiro.Controllers
 
             if (!priceHistory.Any())
                 return NotFound($"Ativo {symbol} não encontrado");
-
+            
             return Ok(priceHistory.OrderByDescending(ph => ph.Date));
         }
     }

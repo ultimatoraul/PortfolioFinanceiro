@@ -4,14 +4,9 @@ using PortfolioFinanceiro.Business.Models;
 
 namespace PortfolioFinanceiro.Data
 {
-    public class PortfolioRepository : IPortfolioRepository
+    public class PortfolioRepository(DataContext context) : IPortfolioRepository
     {
-        private readonly DataContext _context;
-
-        public PortfolioRepository(DataContext context)
-        {
-            _context = context;
-        }
+        private readonly DataContext _context = context;
 
         public Portfolio? GetPortfolioWithPositions(long id)
         {

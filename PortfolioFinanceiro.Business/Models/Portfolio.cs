@@ -14,6 +14,8 @@ namespace PortfolioFinanceiro.Business.Models
 
     public class Position
     {
+        public long Id { get; set; }
+        public long PortfolioId { get; set; }
         [JsonPropertyName("assetSymbol")]
         public required string Symbol { get; set; }
         public int Quantity { get; set; }

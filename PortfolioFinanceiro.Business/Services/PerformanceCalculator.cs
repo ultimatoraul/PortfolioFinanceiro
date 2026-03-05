@@ -4,14 +4,9 @@ using PortfolioFinanceiro.Business.Interfaces.Services;
 
 namespace PortfolioFinanceiro.Business.Services
 {
-    public class PerformanceCalculator : IPerformanceCalculator
+    public class PerformanceCalculator(IPortfolioRepository repository) : IPerformanceCalculator
     {
-        private readonly IPortfolioRepository _repository;
-
-        public PerformanceCalculator(IPortfolioRepository repository)
-        {
-            _repository = repository;
-        }
+        private readonly IPortfolioRepository _repository = repository;
 
         public Perfomance ToAnalyze(long id)
         {
