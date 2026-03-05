@@ -61,6 +61,33 @@ namespace PortfolioFinanceiro.Business {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MarketData não encontrado.
+        /// </summary>
+        internal static string MarketDataNotFound {
+            get {
+                return ResourceManager.GetString("MarketDataNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Portfolio não possui posições.
+        /// </summary>
+        internal static string PortfolioHasNoPositions {
+            get {
+                return ResourceManager.GetString("PortfolioHasNoPositions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Portfolio não possui valor atrelado.
+        /// </summary>
+        internal static string PortfolioHasNoValue {
+            get {
+                return ResourceManager.GetString("PortfolioHasNoValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Portfolio Id informado não encontrado.
         /// </summary>
         internal static string PortfolioIdInvalid {

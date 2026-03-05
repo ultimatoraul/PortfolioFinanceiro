@@ -41,7 +41,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             _repository.SetAsset(CreateAsset("PETR4", 28.50m, 28.75m));
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.NotNull(result);
@@ -61,7 +61,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             _repository.SetAsset(CreateAsset("PETR4", 28.50m, 30m));
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.NotNull(result);
@@ -81,7 +81,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             _repository.SetAsset(CreateAsset("PETR4", 28.50m, 35m));
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.NotNull(result);
@@ -105,7 +105,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             _repository.SetAsset(CreateAsset("PETR4", 28.50m, 5m));
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.NotNull(result);
@@ -141,7 +141,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             _repository.SetAsset(CreateAsset("VALE3", 20m, 25m));
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.Equal(2, result.PositionsPerformance.Count);
@@ -167,7 +167,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             _repository.SetAsset(CreateAsset("PETR4", 28.50m, 12m));
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.NotNull(result);
@@ -188,7 +188,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             _repository.SetPortfolioWithPositions(null);
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => _calculator.ToAnalyze(999));
+            var ex = Assert.Throws<InvalidOperationException>(() => _calculator.ByPortfolioId(999));
             Assert.NotNull(ex);
         }
 
@@ -215,7 +215,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             _repository.SetAsset(null);
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.NotNull(result);
@@ -245,7 +245,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             _repository.SetAsset(CreateAsset("PETR4", 10m, 15m));
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.NotNull(result);
@@ -270,7 +270,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             ]);
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.NotNull(result);
@@ -300,7 +300,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             ]);
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.NotNull(result);
@@ -322,7 +322,7 @@ namespace PortfolioFinanceiro.Business.xUnit
             _repository.SetAsset(CreateAsset("PETR4", 28.50m, 28.75m));
 
             // Act
-            var result = _calculator.ToAnalyze(1);
+            var result = _calculator.ByPortfolioId(1);
 
             // Assert
             Assert.NotNull(result);

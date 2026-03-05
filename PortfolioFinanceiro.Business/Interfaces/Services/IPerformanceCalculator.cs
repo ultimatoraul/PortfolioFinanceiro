@@ -50,6 +50,6 @@ namespace PortfolioFinanceiro.Business.Interfaces.Services
         /// <exception cref="InvalidOperationException">
         /// Lançada quando o portfólio com o ID fornecido não é encontrado.
         /// </exception>
-        PerfomanceResult ToAnalyze(long id);
+        PerfomanceResult ByPortfolioId(long id);
     }
 }

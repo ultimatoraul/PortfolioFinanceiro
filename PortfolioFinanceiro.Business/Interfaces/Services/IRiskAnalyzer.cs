@@ -3,10 +3,10 @@
 namespace PortfolioFinanceiro.Business.Interfaces.Services
 {
     /// <summary>
-    /// Otimização de rebalanceamento
+    /// Análise de risco
     /// </summary>
     public interface IRiskAnalyzer
     {
-        RiskAnalysis RiskAnalysis(long id);
+        RiskAnalysisResult ByPortfolioId(long id);
     }
 }

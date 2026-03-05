@@ -117,7 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="PortfolioHasNoValue" xml:space="preserve">
+    <value>Portfolio não possui valor atrelado</value>
+  </data>
   <data name="PortfolioIdInvalid" xml:space="preserve">
     <value>Portfolio Id informado não encontrado</value>
+  </data>
+  <data name="PortfolioHasNoPositions" xml:space="preserve">
+    <value>Portfolio não possui posições</value>
+  </data>
+  <data name="MarketDataNotFound" xml:space="preserve">
+    <value>MarketData não encontrado</value>
   </data>
 </root>

@@ -22,7 +22,7 @@ namespace PortfolioFinanceiro.API.Controllers
                 if (!NumberHelper.IsLongType(id))
                     throw new ArgumentException(PortfolioAPIResource.PortfolioIdInvalid);
 
-                PerfomanceResult result = _performanceCalculatorService.ToAnalyze(NumberHelper.StringToLong(id));
+                PerfomanceResult result = _performanceCalculatorService.ByPortfolioId(NumberHelper.StringToLong(id));
                 return Ok(result);
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace PortfolioFinanceiro.API.Controllers
                 if (!NumberHelper.IsLongType(id))
                     throw new ArgumentException(PortfolioAPIResource.PortfolioIdInvalid);
 
-                RebalancingSuggestions result = _rebalancingOptimizerService.Rebalancing(NumberHelper.StringToLong(id));
+                RebalancingSuggestions result = _rebalancingOptimizerService.ByPortfolioId(NumberHelper.StringToLong(id));
                 return Ok(result);
             }
             catch (Exception ex)
@@ -49,14 +49,14 @@ namespace PortfolioFinanceiro.API.Controllers
         }
 
         [HttpGet("{id}/risk-analysis")]
-        public ActionResult<RiskAnalysis> GetRiskAnalysis(string id)
+        public ActionResult<RiskAnalysisResult> GetRiskAnalysis(string id)
         {
             try
             {
                 if (!NumberHelper.IsLongType(id))
                     throw new ArgumentException(PortfolioAPIResource.PortfolioIdInvalid);
 
-                RiskAnalysis result = _riskAnalyzerService.RiskAnalysis(NumberHelper.StringToLong(id));
+                RiskAnalysisResult result = _riskAnalyzerService.ByPortfolioId(NumberHelper.StringToLong(id));
                 return Ok(result);
             }
             catch (Exception ex)

@@ -9,7 +9,7 @@ namespace PortfolioFinanceiro.Business.Services
         private readonly IPortfolioRepository _repository = repository;
 
        
-        public PerfomanceResult ToAnalyze(long id)
+        public PerfomanceResult ByPortfolioId(long id)
         {
             var portfolioObj = _repository.GetPortfolioWithPositions(id);
 

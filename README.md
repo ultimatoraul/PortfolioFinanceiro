@@ -173,5 +173,4 @@ Retorna o RebalancingOptimizer:
 
 
 Comentários Adicionais:
-
-
+Na Etapa Risk Analysis, tive dificuldade para determinar qual seria o calculo para determinar o overallRisk, então optei por uma classificação simples, em uma função em RiskFunctions.DetermineOverallRisk(), desse modo obtendo mais detalhes seria um ponto a ser atualizado.

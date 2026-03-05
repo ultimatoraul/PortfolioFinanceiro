@@ -6,6 +6,7 @@ using PortfolioFinanceiro.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IMarketDataRepository, MarketDataRepository>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 builder.Services.AddScoped<IPerformanceCalculator, PerformanceCalculator>();
 builder.Services.AddScoped<IRebalancingOptimizer, RebalancingOptimizer>();
